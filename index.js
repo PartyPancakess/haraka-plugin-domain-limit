@@ -1,20 +1,27 @@
+// domain-limit
+// Load this plugin after aliases(or domain-aliases) plugin in haraka/config/plugins.
+
 'use strict'
+const Address = require('address-rfc2821').Address;
 
 exports.register = function () {
-  this.load_domain-limit_ini()
+  var plugin = this;
+  plugin.inherits('queue/discard');
+
+  plugin.register_hook('rcpt', 'domain_limit');
+
 }
 
-exports.load_domain-limit_ini = function () {
-  const plugin = this
+exports.domain_limit = function (next, connection, params) {
+  const rcpt = connection.transaction.rcpt_to;
+  var firstDomain = rcpt[0].host;
 
-  plugin.cfg = plugin.config.get('domain-limit.ini', {
-    booleans: [
-      '+enabled',               // plugin.cfg.main.enabled=true
-      '-disabled',              // plugin.cfg.main.disabled=false
-      '+feature_section.yes'    // plugin.cfg.feature_section.yes=true
-    ]
-  },
-  function () {
-    plugin.load_example_ini()
-  })
+  rcpt.forEach(element => {
+    if (element.host !== firstDomain) {
+      next(DENYSOFT, "Mail for this domain cannot be accepted right now; please retry.");
+    }
+  });
+
+  next();
 }
+

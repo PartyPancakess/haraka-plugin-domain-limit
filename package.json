@@ -1,7 +1,7 @@
 {
   "name": "haraka-plugin-domain-limit",
   "version": "1.0.0",
-  "description": "Haraka plugin that frobnicates email connections",
+  "description": "Haraka plugin that limits the number of different domains for recepients in one session to one.",
   "main": "index.js",
   "scripts": {
     "lint": "npx eslint *.js test/*.js",
@@ -12,19 +12,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/haraka/haraka-plugin-domain-limit.git"
+    "url": "git+https://github.com/PartyPancakess/haraka-plugin-domain-limit.git"
   },
   "keywords": [
     "haraka",
     "plugin",
     "domain-limit"
   ],
-  "author": "Welcome Member <happy-haraka-hacker@example.com>",
+  "author": "Bilge Onaycı <bilgehalilonayci@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/haraka/haraka-plugin-domain-limit/issues"
+    "url": "https://github.com/PartyPancakess/haraka-plugin-domain-limit/issues"
   },
-  "homepage": "https://github.com/haraka/haraka-plugin-domain-limit#readme",
+  "homepage": "https://github.com/PartyPancakess/haraka-plugin-domain-limit#readme",
   "devDependencies": {
     "eslint": "*",
     "eslint-plugin-haraka": "*",
