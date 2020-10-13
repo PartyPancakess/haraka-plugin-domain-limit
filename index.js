@@ -15,13 +15,15 @@ exports.register = function () {
 exports.domain_limit = function (next, connection, params) {
   const rcpt = connection.transaction.rcpt_to;
   var firstDomain = rcpt[0].host;
+  var isOk = true;
 
   rcpt.forEach(element => {
     if (element.host !== firstDomain) {
       next(DENYSOFT, "Mail for this domain cannot be accepted right now; please retry.");
+      isOk = false;
     }
   });
 
-  next();
+  if(isOk) next();
 }
 
