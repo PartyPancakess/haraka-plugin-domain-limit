@@ -5,67 +5,24 @@
 
 # haraka-plugin-domain-limit
 
-Clone me, to create a new Haraka plugin!
+This haraka plugin allows to limit the number of different domains for recepients in one session to one. If used together with domain-aliases, original domain and aliased-to domain will be seen as one, accepting both of them.
 
-# Template Instructions
 
-These instructions will not self-destruct after use. Use and destroy.
+If domain.com is an alias for success.com and the recepients, with respective order, are selected as below:
+```
+user1@domain.com
+user2@success.com
+user3@test.com
+```
+Both user1@domain.com and user2@success.com will be allowed, but user3@test.com will be rejected. 
 
-See also, [How to Write a Plugin](https://github.com/haraka/Haraka/wiki/Write-a-Plugin) and [Plugins.md](https://github.com/haraka/Haraka/blob/master/docs/Plugins.md) for additional plugin writing information.
-
-## Create a new repo for your plugin
-
-Haraka plugins are named like `haraka-plugin-something`. All the namespace after `haraka-plugin-` is yours for the taking. Please check the [Plugins](https://github.com/haraka/Haraka/blob/master/Plugins.md) page and a Google search to see what plugins already exist.
-
-Once you've settled on a name, create the GitHub repo. On the repo's main page, click the _Clone or download_ button and copy the URL. Then paste that URL into a local ENV variable with a command like this:
-
-```sh
-export MY_GITHUB_ORG=haraka
-export MY_PLUGIN_NAME=haraka-plugin-SOMETHING
+In below case, however, only user3@test.com will be accepted:
+```
+user3@test.com
+user1@domain.com
+user2@success.com
 ```
 
-Clone and rename the domain-limit repo:
-
-```sh
-git clone git@github.com:haraka/haraka-plugin-domain-limit.git
-mv haraka-plugin-domain-limit $MY_PLUGIN_NAME
-cd $MY_PLUGIN_NAME
-git remote rm origin
-git remote add origin "git@github.com:$MY_GITHUB_ORG/$MY_PLUGIN_NAME.git"
-```
-
-Now you'll have a local git repo to begin authoring your plugin
-
-## rename boilerplate
-
-Replaces all uses of the word `domain-limit` with your plugin's name.
-
-./redress.sh [something]
-
-You'll then be prompted to update package.json and then force push this repo onto the GitHub repo you've created earlier.
-
-
-# Add your content here
-
-## INSTALL
-
-```sh
-cd /path/to/local/haraka
-npm install haraka-plugin-domain-limit
-echo "domain-limit" >> config/plugins
-service haraka restart
-```
-
-### Configuration
-
-If the default configuration is not sufficient, copy the config file from the distribution into your haraka config dir and then modify it:
-
-```sh
-cp node_modules/haraka-plugin-domain-limit/config/domain-limit.ini config/domain-limit.ini
-$EDITOR config/domain-limit.ini
-```
-
-## USAGE
 
 
 <!-- leave these buried at the bottom of the document -->
