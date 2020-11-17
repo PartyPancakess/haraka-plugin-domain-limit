@@ -2,7 +2,7 @@
 // Load this plugin after rcpt_to.in_host_list plugin in haraka/config/plugins.
 
 'use strict'
-const Address = require('address-rfc2821').Address;
+const Address = require('../haraka-necessary-helper-plugins/address-rfc2821').Address;
 
 exports.register = function () {
   var plugin = this;
